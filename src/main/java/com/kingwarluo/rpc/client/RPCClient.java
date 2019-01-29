@@ -1,18 +1,17 @@
 package com.kingwarluo.rpc.client;
 
-        import com.kingwarluo.rpc.common.*;
-        import io.netty.bootstrap.Bootstrap;
-        import io.netty.channel.ChannelInitializer;
-        import io.netty.channel.ChannelOption;
-        import io.netty.channel.ChannelPipeline;
-        import io.netty.channel.EventLoopGroup;
-        import io.netty.channel.nio.NioEventLoopGroup;
-        import io.netty.channel.socket.SocketChannel;
-        import io.netty.channel.socket.nio.NioSocketChannel;
-        import io.netty.handler.timeout.ReadTimeoutHandler;
+import com.kingwarluo.rpc.common.*;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.ReadTimeoutHandler;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
-        import java.util.concurrent.ExecutionException;
-        import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class RPCClient {
 
@@ -73,10 +72,20 @@ public class RPCClient {
             }
         });
         bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true);
+
+        ChannelFuture future = connect();
+        future.addListener(new GenericFutureListener() {
+            @Override
+            public void operationComplete(Future future) throws Exception {
+                if (future.isSuccess()) {
+                    System.out.println("服务器连接已经完成，可以确保消息准确传输。");
+                }
+            }
+        });
     }
 
-    public void connect() {
-        bootstrap.connect(ip, port).syncUninterruptibly();
+    public ChannelFuture connect() {
+        return bootstrap.connect(ip, port).syncUninterruptibly();
     }
 
     public void reconnect() {

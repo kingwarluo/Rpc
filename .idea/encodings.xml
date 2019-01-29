@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/client/MessageCollector.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/client/RPCClient.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/client/RPCException.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/client/RpcFuture.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/Charsets.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/IMessageHandler.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageDecoder.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageEncoder.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageHandlers.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageInput.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageOutput.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/MessageRegistry.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/common/RequestId.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/demo/DemoClient.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/demo/DemoServer.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/demo/ExpRequest.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/demo/ExpResponse.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/server/DefaultHandler.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/server/MessageCollector.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/rpckids/server/RPCServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/kingwarluo/rpc/client/RPCClient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/kingwarluo/rpc/demo/ClientDemo.java" charset="UTF-8" />
   </component>
 </project>
