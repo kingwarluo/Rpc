@@ -7,6 +7,7 @@ import com.kingwarluo.rpc.common.MessageRegistry;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -63,16 +64,20 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
     }
 
     private void handleMessage(ChannelHandlerContext ctx, MessageInput msg) {
-        Class<?> clazz = registry.get(msg.getType());
-        if(clazz == null){
-            handlers.defaultHandler().handle(ctx, msg.getRequestId(), msg);
-        }
-        Object o = msg.getPayload(clazz);
-        IMessageHandler<Object> handler = handlers.get(msg.getType());
-        if (handler != null) {
-            handler.handle(ctx, msg.getRequestId(), o);
-        } else {
-            handlers.defaultHandler().handle(ctx, msg.getRequestId(), msg);
+        try {
+            Class<?> clazz = registry.get(msg.getType());
+            if(clazz == null){
+                handlers.defaultHandler().handle(ctx, msg.getRequestId(), msg);
+            }
+            Object o = msg.getPayload(clazz);
+            IMessageHandler<Object> handler = handlers.get(msg.getType());
+            if (handler != null) {
+                handler.handle(ctx, msg.getRequestId(), o);
+            } else {
+                handlers.defaultHandler().handle(ctx, msg.getRequestId(), msg);
+            }
+        } finally {
+            ReferenceCountUtil.release(msg);
         }
     }
 

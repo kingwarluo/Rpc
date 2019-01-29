@@ -6,6 +6,7 @@ import com.kingwarluo.rpc.common.MessageRegistry;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -59,20 +60,24 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
-        if(!(msg instanceof MessageInput)){
-            return;
+        try {
+            if(!(msg instanceof MessageInput)){
+                return;
+            }
+            MessageInput input = (MessageInput) msg;
+            Class<?> clazz = registry.get(input.getType());
+            if(clazz == null){
+                return;
+            }
+            Object o = input.getPayload(clazz);
+            RPCFuture<Object> future = (RPCFuture<Object>) pendingTasks.remove(input.getRequestId());
+            if (future == null) {
+                return;
+            }
+            future.success(o);
+        } finally {
+            ReferenceCountUtil.release(msg);
         }
-        MessageInput input = (MessageInput) msg;
-        Class<?> clazz = registry.get(input.getType());
-        if(clazz == null){
-            return;
-        }
-        Object o = input.getPayload(clazz);
-        RPCFuture<Object> future = (RPCFuture<Object>) pendingTasks.remove(input.getRequestId());
-        if (future == null) {
-            return;
-        }
-        future.success(o);
     }
 
     @Override
