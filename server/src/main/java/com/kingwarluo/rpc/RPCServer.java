@@ -1,4 +1,4 @@
-package com.kingwarluo.rpc.server;
+package com.kingwarluo.rpc;
 
 import com.kingwarluo.rpc.common.*;
 import io.netty.bootstrap.ServerBootstrap;
@@ -7,8 +7,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 
 import java.net.InetSocketAddress;
 

@@ -1,4 +1,4 @@
-package com.kingwarluo.rpc.server;
+package com.kingwarluo.rpc;
 
 import com.kingwarluo.rpc.common.IMessageHandler;
 import com.kingwarluo.rpc.common.MessageHandlers;
@@ -47,6 +47,7 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
         System.out.println("connection comes");
     }
 
+    @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         // 客户端走了一个
         System.out.println("connection leaves");
