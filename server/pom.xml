@@ -41,7 +41,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.kingwarluo.rpc.server.main.ServerDemo</mainClass>
+                            <mainClass>ServerDemo</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
